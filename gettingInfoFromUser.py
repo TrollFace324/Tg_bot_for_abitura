@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from getHTMLsite import get_html_tables
 
-user_id = "4032518"
+user_id = 4032518
 user_tables = []
 user_inf = []
 
@@ -50,7 +50,9 @@ def get_tables() -> list[list]:
         
     return result
 
-def get_user_table(user_id: str, all_tables: list[list]):
+def get_user_table(user_id: int):
+    user_id = str(user_id)
+    all_tables = get_tables()
     result = []
 
     for table in all_tables:
@@ -61,7 +63,9 @@ def get_user_table(user_id: str, all_tables: list[list]):
     
     return result
 
-def get_user_info(user_tables: list[list]):
+def get_user_info(user_id: int):
+    user_id = str(user_id)
+    user_tables = get_user_table(user_id)
     result = []
 
     for table in user_tables:
@@ -71,6 +75,3 @@ def get_user_info(user_tables: list[list]):
     
     return sorted(result, key=lambda x: x[0])
 
-
-for data in get_user_info(get_user_table(user_id, get_tables())):
-    print(data)
